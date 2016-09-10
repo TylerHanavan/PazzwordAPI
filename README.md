@@ -15,6 +15,8 @@ These features include:
   <li>Static classes that handle mundane activities (comparing objects [ItemStacks, Locations], serializing special data types, etc)</li>
 </ul>
 
+<hr />
+
 <b>MIT License
 
 Copyright (c) 2016 Tyler Hanavan
