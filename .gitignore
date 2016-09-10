@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+bin/com/PazzwordAPI/plugin/util/Utils.class
+*.class
+.project
+*.prefs

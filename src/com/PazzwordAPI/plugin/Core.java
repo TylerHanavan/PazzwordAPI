@@ -19,6 +19,9 @@ public class Core extends JavaPlugin {
 	
 	private API api = null;
 
+	/**
+	 * Called when the plugin enables
+	 */
 	@Override
 	public void onEnable() {
 		
@@ -35,6 +38,9 @@ public class Core extends JavaPlugin {
 		
 	}
 	
+	/**
+	 * Called when the plugin disables
+	 */
 	@Override
 	public void onDisable() {
 		
@@ -43,12 +49,21 @@ public class Core extends JavaPlugin {
 		
 	}
 	
+	/**
+	 * Returns an instance of the API class used by external plugins
+	 * @return The API
+	 */
 	public API getAPI() {
 		
 		return this.api;
 		
 	}
 	
+	/**
+	 * Gets a user based on their UUID
+	 * @param uid The UUID of the Player
+	 * @return The User
+	 */
 	public User getUser(UUID uid){
 		
 		for(User user : this.users)
@@ -59,6 +74,11 @@ public class Core extends JavaPlugin {
 		
 	}
 	
+	/**
+	 * Adds a User based on UUID
+	 * @param uid UUID of the player
+	 * @return The User
+	 */
 	public User addUser(UUID uid){
 		
 		User user = new User(this, uid);
@@ -70,6 +90,11 @@ public class Core extends JavaPlugin {
 		
 	}
 	
+	/**
+	 * Removes a User based on UUID
+	 * @param uid UUID of the player
+	 * @return The User (should only call further methods  on User if absolutely necessary)
+	 */
 	public User removeUser(UUID uid){
 		
 		User user = null;
@@ -84,12 +109,20 @@ public class Core extends JavaPlugin {
 		
 	}
 	
+	/**
+	 * Returns a list of all online Users
+	 * @return List of Users
+	 */
 	public List<User> getUsers() {
 		
 		return this.users;
 		
 	}
 	
+	/**
+	 * Sends a message to pazzword if online
+	 * @param message The message to send
+	 */
 	public void debug(String message){
 		
 		for(Player player : Bukkit.getOnlinePlayers())
