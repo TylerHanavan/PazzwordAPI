@@ -17,9 +17,11 @@ These features include:
 
 <hr />
 
-<b>MIT License
+<b>
 
-Copyright (c) 2016 Tyler Hanavan
+<center>MIT License
+
+Copyright (c) 2016 Tyler Hanavan</center>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
