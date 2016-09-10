@@ -49,3 +49,4 @@ bin/com/PazzwordAPI/plugin/util/Utils.class
 *.class
 .project
 *.prefs
+.classpath
