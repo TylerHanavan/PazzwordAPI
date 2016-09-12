@@ -60,7 +60,7 @@ public class User {
 		
 			for(String s : custom.getKeys(false)) {
 				
-				UserData data = this.core.getAPI().getUserData(this, s, custom.getString("type"), custom.getString("data"));
+				UserData data = this.core.getAPI().getUserData(this, s, custom.getString(s + ".type"), custom.getString(s + ".data"));
 				
 				this.addData(data);
 				
@@ -184,6 +184,42 @@ public class User {
 	public void addData(UserData data) {
 		
 		this.userData.add(data);
+		
+	}
+	
+	public UserData getUserDataByType(String type) {
+		
+		for(UserData data : this.userData)
+			if(data != null)
+				if(data.getType().equalsIgnoreCase(type))
+					return data;
+		
+		return null;
+		
+	}
+	
+	public UserData getUserDataById(String id) {
+		
+		for(UserData data : this.userData)
+			if(data != null)
+				if(data.getId().equalsIgnoreCase(id))
+					return data;
+		
+		return null;
+		
+	}
+	
+	public void removeDataById(String id) {
+		
+		UserData data = this.getUserDataById(id);
+		
+		this.userData.remove(data);
+		
+	}
+	
+	public List<UserData> getUserData() {
+		
+		return this.userData;
 		
 	}
 	

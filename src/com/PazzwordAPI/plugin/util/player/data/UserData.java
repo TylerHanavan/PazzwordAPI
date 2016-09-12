@@ -24,6 +24,18 @@ public class UserData {
 		this.o = o;
 		
 	}
+
+	public UserData(String id, String type, Object o, boolean save) {
+		
+		this.id = id;
+		
+		this.type = type;
+		
+		this.o = o;
+		
+		this.save = save;
+		
+	}
 	
 	public String getId() {
 		

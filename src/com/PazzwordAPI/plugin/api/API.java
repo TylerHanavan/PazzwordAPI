@@ -26,6 +26,16 @@ public class API {
 		return new UserData(id, type, o);
 		
 	}
+
+	public UserData getUserData(User user, String id, String type, Object o, boolean save) {
+		
+		for(UserDataHandler handler : this.getUserDataHandlers())
+			if(handler.handles(type))
+				return handler.handle(user, id, type, o);
+		
+		return new UserData(id, type, o, save);
+		
+	}
 	
 	public API addDataHandler(UserDataHandler handler) {
 		

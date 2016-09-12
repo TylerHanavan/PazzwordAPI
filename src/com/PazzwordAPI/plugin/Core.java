@@ -25,6 +25,8 @@ public class Core extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
+		this.api = new API();
+		
 		this.users = new ArrayList<User>();
 		
 		(new File(this.getDataFolder().getAbsolutePath() + File.separator + "users")).mkdirs();
@@ -33,8 +35,6 @@ public class Core extends JavaPlugin {
 			this.addUser(player.getUniqueId());
 		
 		this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-		
-		this.api = new API();
 		
 	}
 	

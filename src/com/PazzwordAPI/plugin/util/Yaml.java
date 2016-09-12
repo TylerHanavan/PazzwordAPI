@@ -80,6 +80,29 @@ public class Yaml {
 		
 	}
 	
+	public void load() {
+
+		
+		try {
+			this.config.load(this.file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void reload() {
+		this.save();
+		this.load();
+	}
+	
 	public void set(String node, Object o) {
 		
 		if(o instanceof Location) {
@@ -136,6 +159,8 @@ public class Yaml {
 		if(section != null) {
 			
 			String s = section.getString("location");
+			
+			if(s == null) return null;
 			
 			String[] data = s.split(",");
 			
