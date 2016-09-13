@@ -193,9 +193,13 @@ public class UserInventory {
 
 		UserItemStack item = this.getItemAt(slot);
 		
-		item.onClick(this);
+		if(item != null) {
 		
-		this.click(item, type);
+			item.onClick(this);
+			
+			this.click(item, type);
+		
+		}
 		
 	}
 	

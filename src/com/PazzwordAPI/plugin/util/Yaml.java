@@ -816,19 +816,25 @@ public class Yaml {
 	
 	public int getInt(String node) {
 		
-		return (Integer) this.get(node);
+		return (Integer) this.config.getInt(node);
 		
 	}
 	
 	public double getDouble(String node) {
 		
-		return (Double) this.get(node);
+		return (Double) this.config.getDouble(node);
 		
 	}
 	
 	public String getString(String node) {
 		
 		return (String) this.config.getString(node);
+		
+	}
+	
+	public List<String> getStringList(String node) {
+		
+		return this.config.getStringList(node);
 		
 	}
 	

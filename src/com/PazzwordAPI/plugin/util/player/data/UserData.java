@@ -1,5 +1,9 @@
 package com.PazzwordAPI.plugin.util.player.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import com.PazzwordAPI.plugin.util.Utils;
@@ -51,6 +55,26 @@ public class UserData {
 	
 	public Object getData() {
 		
+		Object o = this.o;
+		
+		if(o instanceof String && this.type.equalsIgnoreCase("int"))
+			return Integer.parseInt((String) o);
+		
+		if(o instanceof String && this.type.equalsIgnoreCase("long"))
+			return Long.parseLong((String) o);
+		
+		List<String> list = new ArrayList<String>();
+		
+		if(o instanceof String && this.type.equalsIgnoreCase("list"))
+			for(String s : ((String) o).split(";;;")) {
+				list.add(s);
+				Bukkit.broadcastMessage("list.add " + s);
+			}
+		
+		if(list.size() > 0)
+			return list;
+				
+		
 		return this.o;
 		
 	}
@@ -90,6 +114,20 @@ public class UserData {
 			User user = (User) o;
 			
 			return User.toString(user);
+			
+		}
+		
+		if(o instanceof List) {
+			
+			String ret = "";
+			
+			for(Object os : ((List) o)) {
+				
+				ret += os.toString() + ";;;";
+				
+			}
+			
+			return ret;
 			
 		}
 		

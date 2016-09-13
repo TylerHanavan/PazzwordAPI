@@ -60,9 +60,21 @@ public class User {
 		
 			for(String s : custom.getKeys(false)) {
 				
-				UserData data = this.core.getAPI().getUserData(this, s, custom.getString(s + ".type"), custom.getString(s + ".data"));
+				String type = custom.getString(s + ".type");
 				
-				this.addData(data);
+				if(type.equalsIgnoreCase("list")) {
+				
+					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getStringList(s + ".data"));
+					
+					this.addData(data);
+					
+				} else {
+				
+					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getString(s + ".data"));
+					
+					this.addData(data);
+					
+				}
 				
 			}
 		
@@ -87,8 +99,21 @@ public class User {
 		for(UserData data : this.userData) {
 			
 			if(data.shouldSave()) {
-				this.yaml.set("custom." + data.getId().toLowerCase() + ".data", data.getDataToString());
-				this.yaml.set("custom." + data.getId().toLowerCase() + ".type", data.getType());
+				
+				if(data.getType().equalsIgnoreCase("list")) {
+					
+					List<Object> list = (List<Object>) data.getData();
+					
+					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", list);
+					this.yaml.set("custom." + data.getId().toLowerCase() + ".type", data.getType());
+					
+				} else {
+				
+					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", data.getDataToString());
+					this.yaml.set("custom." + data.getId().toLowerCase() + ".type", data.getType());
+				
+				}
+				
 			}
 			
 		}
