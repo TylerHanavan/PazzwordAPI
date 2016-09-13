@@ -63,6 +63,9 @@ public class UserData {
 		if(o instanceof String && this.type.equalsIgnoreCase("long"))
 			return Long.parseLong((String) o);
 		
+		if(o instanceof String && this.type.equalsIgnoreCase("double"))
+			return Double.parseDouble((String) o);
+		
 		List<String> list = new ArrayList<String>();
 		
 		if(o instanceof String && this.type.equalsIgnoreCase("list"))
