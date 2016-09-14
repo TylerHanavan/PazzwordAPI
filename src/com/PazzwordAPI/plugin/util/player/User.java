@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -269,16 +270,10 @@ public class User {
 		if(uuid != null && !uuid.equalsIgnoreCase(uid.toString())) {
 		
 			usersYaml.set(username.toLowerCase(), uid.toString());
-			
-			usersYaml.save();
-			usersYaml.load();
 		
 		} else {
 			
 			usersYaml.set(username.toLowerCase(), uid.toString());
-		
-			usersYaml.save();
-			usersYaml.load();
 			
 		}
 		
@@ -286,11 +281,21 @@ public class User {
 	
 	public static UUID getUUIDFromUsername(String username) {
 		
-		String uid = (String) usersYaml.get(username.toLowerCase());
+		usersYaml.load();
 		
-		UUID uuid = UUID.fromString(uid);
+		String s = usersYaml.getString(username.toLowerCase());
 		
-		return uuid;
+		if(s != null) {
+			
+			UUID uuid = UUID.fromString(s);
+			
+			return uuid;
+			
+		}
+		
+		Logger.getLogger("Minecraft").info("UUID null from config");
+		
+		return null;
 		
 	}
 	
@@ -309,6 +314,8 @@ public class User {
 				}
 			
 			usersYaml = new Yaml(file);
+			
+			usersYaml.load();
 			
 		}
 		
