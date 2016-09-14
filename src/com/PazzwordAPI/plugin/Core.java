@@ -27,6 +27,8 @@ public class Core extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
+		Bukkit.broadcastMessage("chat");
+		
 		this.api = new API();
 		
 		User.doYaml(this);

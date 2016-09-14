@@ -21,17 +21,6 @@ public class UserData {
 	
 	private boolean save = false;
 
-	@Deprecated
-	public UserData(String id, String type, Object o) {
-		
-		this.id = id;
-		
-		this.type = type;
-		
-		this.o = o;
-		
-	}
-
 	public UserData(String id, String type, Object o, boolean save) {
 		
 		this.id = id;
@@ -41,8 +30,6 @@ public class UserData {
 		this.o = o;
 		
 		this.save = save;
-		
-		Bukkit.broadcastMessage("new");
 		
 	}
 	
@@ -89,8 +76,6 @@ public class UserData {
 	}
 	
 	public Object getData() {
-		
-		if(this.ret != null) return ret;
 		
 		return this.o;
 		

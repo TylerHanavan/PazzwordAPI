@@ -1,13 +1,11 @@
 package com.PazzwordAPI.plugin.util.player.data.handler;
 
+import org.bukkit.Bukkit;
+
 import com.PazzwordAPI.plugin.util.player.data.DataHandler;
 import com.PazzwordAPI.plugin.util.player.data.UserData;
 
 public class JavaNativeDataHandler implements DataHandler {
-	
-	private String types[] = {
-		"int", "double", "float", "char"
-	};
 
 	@Override
 	public UserData handle(UserData data) {
@@ -27,18 +25,16 @@ public class JavaNativeDataHandler implements DataHandler {
 		if(type.equalsIgnoreCase("double"))
 			data.overrideData(Double.parseDouble(s));
 		
+		Bukkit.broadcastMessage("seven");
+		
 		return data;
 			
 	}
 
 	@Override
 	public boolean handles(String type) {
-
-		for(int i = 0; i < this.types.length; i++)
-			if(this.types[i].equalsIgnoreCase(type))
-				return true;
 		
-		return false;
+		return type.equalsIgnoreCase("int") || type.equalsIgnoreCase("long") || type.equalsIgnoreCase("double") || type.equalsIgnoreCase("float");
 	}
 
 }
