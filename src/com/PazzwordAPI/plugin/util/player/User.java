@@ -80,6 +80,8 @@ public class User {
 		
 		}
 		
+		User.setUsernameForUUID(this.getPlayer().getName(), this.uid);
+		
 	}
 	
 	public void save() {
@@ -255,6 +257,60 @@ public class User {
 		if(user == null) return "u{UNKNOWN}";
 		
 		return "u{" + user.getUUID().toString() + "}";
+		
+	}
+	
+	private static Yaml usersYaml = null;
+	
+	private static void setUsernameForUUID(String username, UUID uid) {
+		
+		String uuid = usersYaml.getString(username.toLowerCase());
+		
+		if(uuid != null && !uuid.equalsIgnoreCase(uid.toString())) {
+		
+			usersYaml.set(username.toLowerCase(), uid.toString());
+			
+			usersYaml.save();
+			usersYaml.load();
+		
+		} else {
+			
+			usersYaml.set(username.toLowerCase(), uid.toString());
+		
+			usersYaml.save();
+			usersYaml.load();
+			
+		}
+		
+	}
+	
+	public static UUID getUUIDFromUsername(String username) {
+		
+		String uid = (String) usersYaml.get(username.toLowerCase());
+		
+		UUID uuid = UUID.fromString(uid);
+		
+		return uuid;
+		
+	}
+	
+	public static void doYaml(Core core) {
+		
+		if(usersYaml == null) {
+			
+			File file = new File(core.getDataFolder().getAbsolutePath() + File.separator + "users.yml");
+			
+			if(!file.exists())
+				try {
+					file.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			usersYaml = new Yaml(file);
+			
+		}
 		
 	}
 	

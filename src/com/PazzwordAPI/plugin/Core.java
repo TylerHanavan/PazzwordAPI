@@ -27,6 +27,8 @@ public class Core extends JavaPlugin {
 		
 		this.api = new API();
 		
+		User.doYaml(this);
+		
 		this.users = new ArrayList<User>();
 		
 		(new File(this.getDataFolder().getAbsolutePath() + File.separator + "users")).mkdirs();
