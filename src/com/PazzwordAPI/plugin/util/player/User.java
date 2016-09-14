@@ -65,13 +65,13 @@ public class User {
 				
 				if(type.equalsIgnoreCase("list")) {
 				
-					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getStringList(s + ".data"));
+					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getStringList(s + ".data"), true);
 					
 					this.addData(data);
 					
 				} else {
 				
-					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getString(s + ".data"));
+					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getString(s + ".data"), true);
 					
 					this.addData(data);
 					

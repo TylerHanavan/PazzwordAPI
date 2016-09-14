@@ -4,40 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.PazzwordAPI.plugin.util.player.User;
+import com.PazzwordAPI.plugin.util.player.data.DataHandler;
 import com.PazzwordAPI.plugin.util.player.data.UserData;
-import com.PazzwordAPI.plugin.util.player.data.UserDataHandler;
 
 public class API {
 	
-	private List<UserDataHandler> dataHandlers = null;
+	private List<DataHandler> dataHandlers = null;
 	
 	public API() {
 		
-		this.dataHandlers = new ArrayList<UserDataHandler>();
-		
-	}
-
-	public UserData getUserData(User user, String id, String type, Object o) {
-		
-		for(UserDataHandler handler : this.getUserDataHandlers())
-			if(handler.handles(type))
-				return handler.handle(user, id, type, o);
-		
-		return new UserData(id, type, o);
+		this.dataHandlers = new ArrayList<DataHandler>();
 		
 	}
 
 	public UserData getUserData(User user, String id, String type, Object o, boolean save) {
 		
-		for(UserDataHandler handler : this.getUserDataHandlers())
-			if(handler.handles(type))
-				return handler.handle(user, id, type, o);
+		UserData data = user.getUserDataById(id);
+		
+		if(data != null) {
+			
+			if(data.getOverridenData() == null) {
+		
+				for(DataHandler handler : this.getUserDataHandlers())
+					if(handler.handles(type))
+						return handler.handle(data);
+			
+			}
+			
+			return data;
+		
+		}
 		
 		return new UserData(id, type, o, save);
 		
 	}
 	
-	public API addDataHandler(UserDataHandler handler) {
+	public API addDataHandler(DataHandler handler) {
 		
 		this.dataHandlers.add(handler);
 		
@@ -45,7 +47,7 @@ public class API {
 		
 	}
 	
-	public List<UserDataHandler> getUserDataHandlers() {
+	public List<DataHandler> getUserDataHandlers() {
 		
 		return this.dataHandlers;
 		

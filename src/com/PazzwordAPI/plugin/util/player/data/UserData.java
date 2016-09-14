@@ -17,8 +17,11 @@ public class UserData {
 	
 	private Object o;
 	
+	private Object ret = null;
+	
 	private boolean save = false;
 
+	@Deprecated
 	public UserData(String id, String type, Object o) {
 		
 		this.id = id;
@@ -39,6 +42,8 @@ public class UserData {
 		
 		this.save = save;
 		
+		Bukkit.broadcastMessage("new");
+		
 	}
 	
 	public String getId() {
@@ -53,30 +58,39 @@ public class UserData {
 		
 	}
 	
+	public Object getOverridenData() {
+		
+		return this.ret;
+		
+	}
+	
+	public boolean isInteger() {
+		
+		return this.getOverridenData() != null && this.getOverridenData() instanceof Integer;
+		
+	}
+	
+	public boolean isDouble() {
+		
+		return this.getOverridenData() != null && this.getOverridenData() instanceof Double;
+		
+	}
+	
+	public boolean isLong() {
+		
+		return this.getOverridenData() != null && this.getOverridenData() instanceof Float;
+		
+	}
+	
+	public boolean isFloat() {
+		
+		return this.getOverridenData() != null && this.getOverridenData() instanceof Float;
+		
+	}
+	
 	public Object getData() {
 		
-		Object o = this.o;
-		
-		if(o instanceof String && this.type.equalsIgnoreCase("int"))
-			return Integer.parseInt((String) o);
-		
-		if(o instanceof String && this.type.equalsIgnoreCase("long"))
-			return Long.parseLong((String) o);
-		
-		if(o instanceof String && this.type.equalsIgnoreCase("double"))
-			return Double.parseDouble((String) o);
-		
-		List<String> list = new ArrayList<String>();
-		
-		if(o instanceof String && this.type.equalsIgnoreCase("list"))
-			for(String s : ((String) o).split(";;;")) {
-				list.add(s);
-				Bukkit.broadcastMessage("list.add " + s);
-			}
-		
-		if(list.size() > 0)
-			return list;
-				
+		if(this.ret != null) return ret;
 		
 		return this.o;
 		
@@ -86,55 +100,13 @@ public class UserData {
 		
 		Object o = this.getData();
 		
-		if(o == null) return "UserData#getDataToString() is null";
-		
-		if(o instanceof Location) {
-			
-			return Utils.locationToString((Location) o);
-			
-		}
-		
-		if(o instanceof Integer) {
-			
-			return ((Integer) o).intValue() + "";
-			
-		}
-		
-		if(o instanceof Double) {
-			
-			return ((Double) o).doubleValue() + "";
-			
-		}
-		
-		if(o instanceof Float) {
-			
-			return ((Float) o).floatValue() + "";
-			
-		}
-		
-		if(o instanceof User) {
-			
-			User user = (User) o;
-			
-			return User.toString(user);
-			
-		}
-		
-		if(o instanceof List) {
-			
-			String ret = "";
-			
-			for(Object os : ((List) o)) {
-				
-				ret += os.toString() + ";;;";
-				
-			}
-			
-			return ret;
-			
-		}
-		
 		return o.toString();
+		
+	}
+	
+	public void overrideData(Object o) {
+		
+		this.ret = o;
 		
 	}
 	
