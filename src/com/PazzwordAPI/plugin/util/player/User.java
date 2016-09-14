@@ -57,8 +57,6 @@ public class User {
 		
 		ConfigurationSection custom = this.yaml.getConfigurationSection("custom");
 		
-		Bukkit.broadcastMessage("sex");
-		
 		if(custom != null) {
 		
 			for(String s : custom.getKeys(false)) {
@@ -230,20 +228,20 @@ public class User {
 		
 	}
 	
-	public UserData getUserDataById(String id, String type) {
+	public UserData getUserDataById(String id) {
 		
 		for(UserData data : this.userData)
 			if(data != null)
 				if(data.getId().equalsIgnoreCase(id))
 					return data;
 		
-		return this.core.getAPI().getUserData(this, id, type, null, true);
+		return null;
 		
 	}
 	
 	public void removeDataById(String id) {
 		
-		UserData data = this.getUserDataById(id, null);
+		UserData data = this.getUserDataById(id);
 		
 		this.userData.remove(data);
 		

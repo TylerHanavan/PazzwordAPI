@@ -13,7 +13,6 @@ import com.PazzwordAPI.plugin.api.API;
 import com.PazzwordAPI.plugin.listener.PlayerListener;
 import com.PazzwordAPI.plugin.util.player.User;
 import com.PazzwordAPI.plugin.util.player.data.handler.JavaNativeDataHandler;
-import com.PazzwordAPI.plugin.util.player.data.handler.StringListDataHandler;
 
 public class Core extends JavaPlugin {
 	
@@ -42,7 +41,6 @@ public class Core extends JavaPlugin {
 		
 		this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 		
-		this.api.addDataHandler(new StringListDataHandler());
 		this.api.addDataHandler(new JavaNativeDataHandler());
 		
 	}
