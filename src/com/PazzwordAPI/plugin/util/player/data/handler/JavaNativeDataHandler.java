@@ -24,8 +24,9 @@ public class JavaNativeDataHandler implements DataHandler {
 
 		if(type.equalsIgnoreCase("double"))
 			data.overrideData(Double.parseDouble(s));
-		
-		Bukkit.broadcastMessage("seven");
+
+		if(type.equalsIgnoreCase("boolean"))
+			data.overrideData(Boolean.parseBoolean(s));
 		
 		return data;
 			
@@ -34,7 +35,7 @@ public class JavaNativeDataHandler implements DataHandler {
 	@Override
 	public boolean handles(String type) {
 		
-		return type.equalsIgnoreCase("int") || type.equalsIgnoreCase("long") || type.equalsIgnoreCase("double") || type.equalsIgnoreCase("float");
+		return type.equalsIgnoreCase("int") || type.equalsIgnoreCase("long") || type.equalsIgnoreCase("double") || type.equalsIgnoreCase("float") || type.equalsIgnoreCase("boolean");
 	}
 
 }

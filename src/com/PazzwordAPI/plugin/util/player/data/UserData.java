@@ -19,7 +19,7 @@ public class UserData {
 	
 	private Object ret = null;
 	
-	private boolean save = false;
+	private boolean save = true;
 
 	public UserData(String id, String type, Object o, boolean save) {
 		
@@ -48,6 +48,12 @@ public class UserData {
 	public Object getOverridenData() {
 		
 		return this.ret;
+		
+	}
+	
+	public boolean isBoolean() {
+		
+		return this.getOverridenData() != null && this.getOverridenData() instanceof Boolean;
 		
 	}
 	

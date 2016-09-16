@@ -51,6 +51,8 @@ public class User {
 		
 		this.yaml = new Yaml(this.file);
 		
+		this.yaml.load();
+		
 		this.timeJoined = new Date().getTime();
 		
 		this.userData = new ArrayList<UserData>();
@@ -60,8 +62,6 @@ public class User {
 		if(custom != null) {
 		
 			for(String s : custom.getKeys(false)) {
-				
-				Bukkit.broadcastMessage(s);
 				
 				String type = custom.getString(s + ".type");
 				
@@ -114,7 +114,7 @@ public class User {
 					
 				} else {
 				
-					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", data.getDataToString());
+					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", data.getOverridenData() != null ? data.getOverridenData() : data.getDataToString());
 					this.yaml.set("custom." + data.getId().toLowerCase() + ".type", data.getType());
 				
 				}
@@ -267,6 +267,8 @@ public class User {
 	
 	private static void setUsernameForUUID(String username, UUID uid) {
 		
+		usersYaml.load();
+		
 		String uuid = usersYaml.getString(username.toLowerCase());
 		
 		if(uuid != null && !uuid.equalsIgnoreCase(uid.toString())) {
@@ -278,6 +280,8 @@ public class User {
 			usersYaml.set(username.toLowerCase(), uid.toString());
 			
 		}
+		
+		usersYaml.save();
 		
 	}
 	

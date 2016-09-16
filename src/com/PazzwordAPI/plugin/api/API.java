@@ -21,15 +21,7 @@ public class API {
 
 	public UserData getUserData(User user, String id, String type, Object o, boolean save) {
 		
-		UserData data = user.getUserDataById(id);
-		
-		if(data != null) {
-		
-		} else {
-		
-			data = new UserData(id, type, o, save);
-		
-		}
+		UserData data = new UserData(id, type, o, save);
 	
 		for(DataHandler handler : this.getUserDataHandlers())
 			if(handler.handles(type)) {
@@ -49,8 +41,6 @@ public class API {
 	}
 	
 	public List<DataHandler> getUserDataHandlers() {
-		
-		Bukkit.broadcastMessage(this.dataHandlers.size() + " ");
 		
 		return this.dataHandlers;
 		

@@ -40,9 +40,12 @@ public class SignAPI {
 	
 	public static SignInstance getSignInstance(Sign sign, boolean load, boolean create) {
 		
+		init();
+		
 		for(SignInstance instance : signs)
 			if(instance.getSign().equals(sign) || instance.getSign().getLocation().equals(sign.getLocation()))
 				return instance;
+		
 		if(create) {
 			
 			SignInstance instance = new SignInstance(sign);
@@ -62,6 +65,8 @@ public class SignAPI {
 	
 	private static void load(SignInstance instance) {
 		
+		init();
+		
 		for(SignLoader loader : signLoaders)
 			if(loader.load(instance))
 				loader.handle(instance);
@@ -75,6 +80,8 @@ public class SignAPI {
 	}
 	
 	public static void triggerSignDestroyed(SignInstance sign) {
+		
+		init();
 		
 		signs.remove(sign);
 		
