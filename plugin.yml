@@ -2,4 +2,5 @@ name: PazzwordAPI
 version: 0.1
 description: Pazzword API
 main: com.PazzwordAPI.plugin.Core
+softdepends: Citizens
 commands:

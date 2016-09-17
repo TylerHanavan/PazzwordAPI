@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
 
 import com.PazzwordAPI.plugin.util.player.User;
 import com.PazzwordAPI.plugin.util.player.data.DataHandler;
 import com.PazzwordAPI.plugin.util.player.data.UserData;
+
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.npc.NPCRegistry;
 
 public class API {
 	

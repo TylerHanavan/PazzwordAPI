@@ -11,6 +11,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
 public class ItemStacks {
+	
+	public static boolean compareLoose(ItemStack item1, ItemStack item2) {
+		
+		if(item1 == null && item2 == null) return true;
+		if(item1 == null && item2 != null) return false;
+		if(item1 != null && item2 == null) return false;
+		
+		if(item1.getType() != item2.getType()) return false;
+		
+		if(item1.getData().getData() != item2.getData().getData()) return false;
+		
+		return true;
+		
+	}
 
 	public static boolean compare(ItemStack item1, ItemStack item2) {
 		

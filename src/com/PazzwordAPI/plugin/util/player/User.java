@@ -61,21 +61,29 @@ public class User {
 		
 		if(custom != null) {
 		
-			for(String s : custom.getKeys(false)) {
+			for(String s : custom.getKeys(true)) {
 				
-				String type = custom.getString(s + ".type");
+				if(s != null && !s.endsWith("data") && !s.endsWith("type")) {
 				
-				if(type.equalsIgnoreCase("list")) {
-				
-					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getStringList(s + ".data"), true);
+					String type = custom.getString(s + ".type");
 					
-					this.addData(data);
+					if(type != null) {
 					
-				} else {
-				
-					UserData data = this.core.getAPI().getUserData(this, s, type, custom.getString(s + ".data"), true);
+						if(type.equalsIgnoreCase("list")) {
+						
+							UserData data = this.core.getAPI().getUserData(this, s, type, custom.getStringList(s + ".data"), true);
+							
+							this.addData(data);
+							
+						} else {
+						
+							UserData data = this.core.getAPI().getUserData(this, s, type, custom.getString(s + ".data"), true);
+							
+							this.addData(data);
+							
+						}
 					
-					this.addData(data);
+					}
 					
 				}
 				
@@ -114,7 +122,7 @@ public class User {
 					
 				} else {
 				
-					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", data.getOverridenData() != null ? data.getOverridenData() : data.getDataToString());
+					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", data.getOverridenData() != null ? data.getOverridenData() : data.getData());
 					this.yaml.set("custom." + data.getId().toLowerCase() + ".type", data.getType());
 				
 				}
