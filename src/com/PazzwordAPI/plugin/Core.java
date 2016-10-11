@@ -10,7 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.PazzwordAPI.plugin.api.API;
+import com.PazzwordAPI.plugin.api.complex.SignAPI;
 import com.PazzwordAPI.plugin.listener.PlayerListener;
+import com.PazzwordAPI.plugin.thread.SignAPIThread;
 import com.PazzwordAPI.plugin.util.player.User;
 import com.PazzwordAPI.plugin.util.player.data.handler.JavaNativeDataHandler;
 
@@ -41,6 +43,10 @@ public class Core extends JavaPlugin {
 		
 		this.api.addDataHandler(new JavaNativeDataHandler());
 		
+		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new SignAPIThread(), 20L, 10L);
+		
+		SignAPI.init(this);
+		
 	}
 	
 	/**
@@ -51,6 +57,8 @@ public class Core extends JavaPlugin {
 		
 		for(User user : this.users)
 			user.save();
+		
+		SignAPI.save();
 		
 	}
 	
@@ -128,7 +136,7 @@ public class Core extends JavaPlugin {
 	 * Sends a message to pazzword if online
 	 * @param message The message to send
 	 */
-	public void debug(String message){
+	public static void debug(String message){
 		
 		for(Player player : Bukkit.getOnlinePlayers())
 			if(player.getName().equalsIgnoreCase("pazzword"))

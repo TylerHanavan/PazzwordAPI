@@ -119,7 +119,7 @@ public class PlayerListener implements Listener {
 					
 					Sign sign = (Sign) state;
 					
-					SignAPI.getSignInstance(sign, true, true);
+					SignAPI.getSignInstance(sign, true);
 					
 				}
 				
@@ -144,7 +144,7 @@ public class PlayerListener implements Listener {
 					
 					Sign sign = (Sign) state;
 					
-					SignAPI.triggerSignDestroyed(SignAPI.getSignInstance(sign, false, false));
+					SignAPI.triggerSignDestroyed(SignAPI.getSignInstance(sign, false));
 					
 				}
 				

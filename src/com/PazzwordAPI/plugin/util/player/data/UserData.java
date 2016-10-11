@@ -47,6 +47,10 @@ public class UserData {
 	
 	public Object getOverridenData() {
 		
+		if(this.getData() instanceof List) {
+			return this.getData();
+		}
+		
 		return this.ret;
 		
 	}

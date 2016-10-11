@@ -77,7 +77,7 @@ public class User {
 							
 						} else {
 						
-							UserData data = this.core.getAPI().getUserData(this, s, type, custom.getString(s + ".data"), true);
+							UserData data = this.core.getAPI().getUserData(this, s, type, custom.get(s + ".data"), true);
 							
 							this.addData(data);
 							
@@ -113,11 +113,11 @@ public class User {
 			
 			if(data.shouldSave()) {
 				
+				Core.debug("Saving " + data.getId() + " as " + data.getType() + " for " + this.getPlayer().getName() + " as {" + data.getData() + ", " + data.getOverridenData() + "}");
+				
 				if(data.getType().equalsIgnoreCase("list")) {
 					
-					List<Object> list = (List<Object>) data.getData();
-					
-					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", list);
+					this.yaml.set("custom." + data.getId().toLowerCase() + ".data", data.getData());
 					this.yaml.set("custom." + data.getId().toLowerCase() + ".type", data.getType());
 					
 				} else {
